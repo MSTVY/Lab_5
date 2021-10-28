@@ -20,18 +20,11 @@ namespace Lab_5_6
             Console.WriteLine("Магическим квадратом называется матрица, сумма элементов которой в каждой строке, в каждом столбце");
             Console.WriteLine("и по каждой диагонали одинакова.");
             Console.WriteLine();
-            Console.WriteLine("P.S.S.");
-            Console.WriteLine("Выполнил задачу исходя из определения на википедии (https://ru.wikipedia.org/wiki/Магический_квадрат).");
-            Console.WriteLine();
             Console.WriteLine("********************************");
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("ВВЕДИТЕ РАЗМЕРНОСТЬ МАССИВА NxN (минимум 3):");
+            Console.WriteLine("ВВЕДИТЕ РАЗМЕРНОСТЬ МАССИВА NxN (минимум 2):");
             int m = Convert.ToInt32(Console.ReadLine());
-            int a = 0; // Фактическая контрольная сумма в строке
-            int b = 0; // Фактическая констрольная сумма в столбце
-            int c = 0; // Фактическая контрольная сумма по диагонали 1
-            int d = 0; // Фактическая контрольная сумма по диагонали 2
             if (m < 3)
             {
                 do
@@ -44,15 +37,15 @@ namespace Lab_5_6
                     }
                     else
                     {
-                        if (m >= 0 && m < 3)
+                        if (m >= 0 && m < 2)
                         {
-                            Console.WriteLine(">> МИНИМАЛЬНАЯ РАЗМЕРНОСТЬ МАССИВА 'МАГИЧЕСКИЙ КВАДРАТ' - 3, ВВЕДЕНО: {0}, ПОВТОРИТЕ ВВОД...", m);
+                            Console.WriteLine(">> МИНИМАЛЬНАЯ РАЗМЕРНОСТЬ МАССИВА 'МАГИЧЕСКИЙ КВАДРАТ' - 2, ВВЕДЕНО: {0}, ПОВТОРИТЕ ВВОД...", m);
                             m = Convert.ToInt32(Console.ReadLine());
                             Console.WriteLine();
                         }
                     }
 
-                } while (m < 3);
+                } while (m < 2);
             }
             Console.WriteLine();
             int[,] array = new int[m, m];
@@ -76,16 +69,20 @@ namespace Lab_5_6
                 }
                 Console.WriteLine();
             }
-            int n = m * (Convert.ToInt32(Math.Pow(m, 2)) + 1) / 2; // Контрольная сумма для матрицы размерности m
+            int n = 0;
+            for (int i = 0; i < m; i++)
+            {
+                n += array[0, i];
+            }
             Console.WriteLine();
             Console.WriteLine(">> КОНТРОЛЬНАЯ СУММА ДЛЯ МАГИЧЕСКОГО КВАДРАТА: {0}", n);
             Console.WriteLine();
             for (int i = 0; i < m; i++) // Считаем суммы в строках
             {
-                a = 0;
-                b = 0;
-                c = 0;
-                d = 0;
+                int a = 0; // Фактическая контрольная сумма в строке
+                int b = 0; // Фактическая констрольная сумма в столбце
+                int c = 0; // Фактическая контрольная сумма по диагонали 1
+                int d = 0; // Фактическая контрольная сумма по диагонали 2
                 for (int j = 0, k = m - 1; j < m; j++, k--)
                 {
                     a += array[i, j];
@@ -114,7 +111,7 @@ namespace Lab_5_6
                         {
                             if (i == m - 1)
                             {
-                                Console.WriteLine(">> МАТРИЦА ЯВЛЯЕТСЯ МАГИЧЕСКИМ КВАДРАТОМ {0} = {1} = {2} = {3} = {4}", a, b, c, d, n);
+                                Console.WriteLine(">> МАТРИЦА ЯВЛЯЕТСЯ МАГИЧЕСКИМ КВАДРАТОМ: {0} = {1} = {2} = {3} = {4}", a, b, c, d, n);
                             }
                         }
                     }
